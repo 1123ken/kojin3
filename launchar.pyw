@@ -8,7 +8,8 @@ def open_application(path):
     subprocess.Popen(path)  #指定されたパスのアプリを開く
     root.destroy()          #アプリケーションを開いたときにアプリを終了する
 
-root = Tk()
+#メインウィンドウ(root)の設定
+root = Tk()                 #tkinterでウィンドウの作成
 root.title("Launcher")      #タイトル名
 root.geometry("300x150")    #windowサイズ
 
@@ -22,12 +23,16 @@ shortcut = {
     "vscode":"C:\\Users\\7d03\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe"
 }
 
-# ボタン    
+# ボタン 初期配置   
 row = 1 #行
 col = 0 #列
-for name, path in shortcut.items(): #shortcutに入っている各項目についてnameを取り出して繰り返す
-    btn = Button(root, text=name, command=lambda p=path: open_application(p))   #lambdaに7行目のopen_application関数を代入
-    btn.grid(column=col, row=row, sticky="NSEW")    #指定位置にボタンを配置
+
+#shortcutに入っている各項目についてnameを取り出して繰り返す
+for name, path in shortcut.items(): 
+    #lambdaに7行目のopen_application関数を代入
+    btn = Button(root, text=name, command=lambda p=path: open_application(p))   
+    #指定位置にボタンを配置
+    btn.grid(column=col, row=row, sticky="NSEW") 
     #３行の表示なので３行目以上になった場合次の２列目に移行
     col += 1        
     if col > 2:     #もし3列より大きいなら
@@ -42,4 +47,5 @@ root.grid_rowconfigure(0, weight=0)
 root.grid_rowconfigure(1, weight=1)
 root.grid_rowconfigure(2, weight=1)
 
-root.mainloop() #勝手に終了しないようにループさせる
+#勝手に終了しないようにループさせる
+root.mainloop()
